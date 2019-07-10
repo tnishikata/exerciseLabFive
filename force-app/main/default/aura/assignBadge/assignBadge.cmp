@@ -1,0 +1,57 @@
+<aura:component implements="force:lightningQuickActionWithoutHeader,force:hasRecordId"
+                controller="AssignBadgeController">
+    <aura:attribute name="badgeNumber" type="String"/>
+    <aura:attribute name="badgeUrl" type="String" default="https://i.ibb.co/Hg4NBtm/imageedit-3-9491140786.png"/>
+    <aura:attribute name="badgeUrlGreen" type="String" default="https://trust.salesforce.com/static/images/trailhead_module_identity_basics.png"/>
+    <aura:attribute name="badgeUrlRed" type="String" default="https://i.ibb.co/Hg4NBtm/imageedit-3-9491140786.png"/>
+
+    <aura:attribute name="assignDisabled" type="Boolean" default="true"/>
+    <aura:handler name="fromModal" event="c:GeneralEvt"
+                  action="{!c.fromModal}" />
+    <aura:html tag="style">
+        .cuf-content {
+        padding: 0 0rem !important;
+        }
+        .slds-p-around--medium {
+        padding: 0rem !important;
+        }
+        .slds-modal__content {
+        overflow-y: hidden !important;
+        height: unset !important;
+        max-height: unset !important;
+        }        
+        .paddingClass{
+        padding-bottom: 16px;
+        padding-left: 16px;
+        padding-right: 16px;
+        padding-top: 16px;
+        }        
+    </aura:html> 
+    <lightning:overlayLibrary aura:id="overlayLib"/>                
+    
+    <div class="slds-col modal-header slds-modal__header slds-is-relative">
+    <lightning:notificationsLibrary aura:id="notifLib"/>            
+        
+        <h2 class="title slds-text-heading--medium">Assign Badge</h2>
+    </div>
+    <div class="slds-col modal-body scrollable slds-p-around--medium bodyClass">
+        <div class="paddingClass">
+            <div class="container">
+                <div class="avatar">
+                    <img src="{!v.badgeUrl}"/>
+                </div>
+            </div>
+            <lightning:input aura:id="badge" 
+                             type="text"  
+                             value="{!v.badgeNumber}" 
+                             label="Badge number"
+                             onchange="{!c.verifyBadgeField}"
+                             class="inputClass"/>            
+        </div>
+    </div>
+    <div class="slds-col modal-footer slds-modal__footer">    
+        <lightning:button variant="neutral" label="Cancel" />  
+        <lightning:button variant="brand" label="Assign" onclick="{!c.assignBadge}" disabled="{!v.assignDisabled}"/>
+    </div>
+
+</aura:component>

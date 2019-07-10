@@ -1,0 +1,21 @@
+<aura:component access="global">
+    <!--Declare Attribute-->
+    <aura:attribute name="message" type="String"/> 
+    <aura:registerEvent name="fromModal" type="c:GeneralEvt"/>
+    
+    <lightning:overlayLibrary aura:id="overlayLib"/>
+        <div class="slds-col modal-header slds-modal__header slds-is-relative">        
+            <h2 class="title slds-text-heading--medium"> Do you want to continue?</h2>
+        </div>
+        <div class="slds-popover__body" id="dialog-body-id-78">
+            <div class="centerClass">
+                <aura:unescapedHtml value="{!v.message}"/>
+            </div>
+        </div>
+        <footer class="slds-popover__footer">
+            <div class="slds-grid slds-grid_vertical-align-center">
+                <button class="slds-button slds-button_neutral slds-col_bump-left" onclick="{!c.myAction}">Back</button>
+                <button class="slds-button slds-button_brand slds-col_bump-left" onclick="{!c.callParent}">Confirm Assign</button>
+            </div>
+        </footer>
+</aura:component>
